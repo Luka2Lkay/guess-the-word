@@ -1,0 +1,12 @@
+#correct-word {
+    padding: 5px;
+}
+
+#correct-word:focus {
+    border: none
+}
+
+main {
+    width: 50%;
+    margin: 0 auto;
+}
