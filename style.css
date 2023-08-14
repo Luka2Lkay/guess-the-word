@@ -9,4 +9,33 @@
 main {
     width: 50%;
     margin: 0 auto;
+    background-color: #0000ff;
+    padding: 10px 0px 10px 0px;
+}
+
+h1, h2, input {
+    text-align: center;
+    /* color: #fff; */
+}
+
+input[type="text"] {
+    margin-left: 36%;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+}
+
+#submit-button{
+    margin-left: 40%;
+    color: white;
+    background-color: #000;
+    font-size: 16px;
+}
+
+#new-word{
+    color: white;
+    background-color: #000;
+    font-size: 16px;
 }
