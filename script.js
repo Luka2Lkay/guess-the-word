@@ -4,6 +4,7 @@ const submitButton = document.getElementById("submit-button");
 const input = document.getElementById("correct-word");
 const message = document.getElementById("message");
 const showScore = document.getElementById("score");
+const resetBtn = document.getElementById("reset");
 
 const words = [
   "shop",
@@ -18,9 +19,7 @@ const words = [
   "food",
 ];
 
-let score = localStorage.getItem("score") || 0 
-
-
+let score = localStorage.getItem("score") || 0;
 
 const generateRandomLetters = () => {
   const randomWords = words.sort(() => Math.random() - 0.5);
@@ -43,6 +42,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const show = () => {
   submitButton.disabled = false;
+  input.disabled = false;
+  input.value = "";
   displayedWord.textContent = "";
   message.textContent = "";
   displayedWord.textContent = generateRandomLetters();
@@ -61,17 +62,28 @@ const answer = (e) => {
   ) {
     score++;
     localStorage.setItem("score", score);
+    message.textContent = "Correct";
     message.style.color = "green";
     e.target.disabled = true;
+    input.disabled = true;
     showScore.textContent = `Score: ${score}`;
   } else {
     score = score - 5;
-    e.target.disabled = true;
-    message.textContent = "Incorrect!";
+    e.target.disabled = false;
+    message.textContent = "Oops! You  just lost 5 points";
     message.style.color = "red";
     showScore.textContent = `Score: ${score}`;
   }
 };
 
+const reset = () => {
+score = 0
+localStorage.clear()
+showScore.textContent = `Score: ${score}`;
+input.disabled = false;
+submitButton.disabled = false;
+}
+
 newWordButton.addEventListener("click", show);
 submitButton.addEventListener("click", answer);
+resetBtn.addEventListener('click', reset)
