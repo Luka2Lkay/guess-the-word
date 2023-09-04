@@ -52,13 +52,13 @@ const show = () => {
 const answer = (e) => {
   const randomLettersLength = displayedWord.textContent.length;
 
-  const sortInputValue = input.value.split("").sort().join("");
-  const sortDisplayWord = displayedWord.textContent.split("").sort().join("");
+  const sortInputValue = input.value.split("").sort().join("").toLowerCase();
+  const sortDisplayWord = displayedWord.textContent.split("").sort().join("").toLowerCase();
 
   if (
     input.value.length === randomLettersLength &&
-    sortInputValue === sortDisplayWord &&
-    words.includes(input.value)
+    sortInputValue=== sortDisplayWord &&
+    words.includes(input.value.toLowerCase())
   ) {
     score++;
     localStorage.setItem("score", score);
@@ -68,22 +68,28 @@ const answer = (e) => {
     input.disabled = true;
     showScore.textContent = `Score: ${score}`;
   } else {
-    score = score - 5;
-    e.target.disabled = false;
-    message.textContent = "Oops! You  just lost 5 points";
-    message.style.color = "red";
-    showScore.textContent = `Score: ${score}`;
+    if (score === 0) {
+      score = 0;
+      message.textContent = "Oops! You got it wrong";
+      message.style.color = "red";
+    } else {
+      score = score - 1;
+      e.target.disabled = false;
+      message.textContent = "Oops! You  just lost 1 point";
+      message.style.color = "red";
+      showScore.textContent = `Score: ${score}`;
+    }
   }
 };
 
 const reset = () => {
-score = 0
-localStorage.clear()
-showScore.textContent = `Score: ${score}`;
-input.disabled = false;
-submitButton.disabled = false;
-}
+  score = 0;
+  localStorage.clear();
+  showScore.textContent = `Score: ${score}`;
+  input.disabled = false;
+  submitButton.disabled = false;
+};
 
 newWordButton.addEventListener("click", show);
 submitButton.addEventListener("click", answer);
-resetBtn.addEventListener('click', reset)
+resetBtn.addEventListener("click", reset);
