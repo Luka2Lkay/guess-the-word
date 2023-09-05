@@ -1,7 +1,9 @@
 #correct-word {
     padding: 5px;
 }
-
+body {
+    padding-top: 10%;
+}
 #correct-word:focus {
     border: none
 }

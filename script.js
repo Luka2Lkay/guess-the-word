@@ -70,14 +70,21 @@ const answer = (e) => {
   } else {
     if (score === 0) {
       score = 0;
+      showScore.textContent = `Score: ${score}`;
       message.textContent = "Oops! You got it wrong";
       message.style.color = "red";
+      e.target.disabled = true;
+      input.disabled = true;
+    
     } else {
       score = score - 1;
+      localStorage.setItem("score", score);
       e.target.disabled = false;
       message.textContent = "Oops! You  just lost 1 point";
       message.style.color = "red";
       showScore.textContent = `Score: ${score}`;
+      e.target.disabled = true;
+      input.disabled = true;
     }
   }
 };
@@ -88,6 +95,9 @@ const reset = () => {
   showScore.textContent = `Score: ${score}`;
   input.disabled = false;
   submitButton.disabled = false;
+  displayedWord.textContent = generateRandomLetters();
+  message.textContent = "";
+  input.value = "";
 };
 
 newWordButton.addEventListener("click", show);
